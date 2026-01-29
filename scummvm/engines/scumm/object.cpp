@@ -578,8 +578,9 @@ void ScummEngine::drawRoomObjects(int arg) {
 			if (_objs[i].obj_nr > 0 && (_objs[i].state & mask) && _objs[i].fl_object_index != 0)
 				drawRoomObject(i, arg);
 		}
-	} else if (_game.id == GID_SAMNMAX) {
+	} else if (_game.id == GID_SAMNMAX || _game.id == GID_TENTACLE) {
 		// In Sam & Max, objects are drawn in reverse order.
+		// We also use this for SCUNK games so inventory overlays can be rendered in front of actors.
 		for (i = 1; i < _numLocalObjects; i++)
 			if (_objs[i].obj_nr > 0)
 				drawRoomObject(i, arg);
