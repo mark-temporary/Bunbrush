@@ -958,6 +958,9 @@ static scc_func_t scc_func_v6_v7[] = {
     { SCC_FA_VAL }
 
   },{
+    "playCDTrack", 0xF2, 0, 4, 0,
+    { SCC_FA_VAL, SCC_FA_VAL, SCC_FA_VAL, SCC_FA_VAL}
+  },{
     NULL, 0, 0, 0, 0, {}
   }
 };

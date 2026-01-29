@@ -225,6 +225,7 @@ protected:
 	void o6_startSound();
 	void o6_stopSound();
 	void o6_startMusic();
+	void o6_playCDTrack();
 	void o6_stopObjectScript();
 	void o6_panCameraTo();
 	void o6_actorFollowCamera();
