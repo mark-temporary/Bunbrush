@@ -23,3 +23,7 @@ In addition you'll also need Docker, [ucon64](https://ucon64.sourceforge.io/), t
 - From your Docker terminal, re-run `make n64-dist`
 - From your first terminal, cd back into the repository root and run `ucon64 --n64 --chk scummvm/scummscummvm.v64` until ucon64 reports **OK** on both Checksums
 - Run the ROM with your emulator or copy it to your FlashCart
+
+## Note about `make tentacle`
+
+Don't worry if **scc** throws `cp: cannot stat 'tentacle.sou': No such file or directory`. The game doesn't use it and the build should still have succeeded.
