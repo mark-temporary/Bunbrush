@@ -206,6 +206,7 @@ void LauncherDialog::open() {
 	Dialog::open();
 
 	updateButtons();
+	addGame();
 }
 
 void LauncherDialog::close() {
@@ -326,7 +327,7 @@ void LauncherDialog::addGame() {
 	do {
 		looping = false;
 
-		if (_browser->runModal() > 0) {
+		// if (_browser->runModal() > 0) {
 			// User made his choice...
 #ifdef USE_LIBCURL
 			String selectedDirectory = _browser->getResult().getPath();
@@ -346,9 +347,12 @@ void LauncherDialog::addGame() {
 				return;
 			}
 #endif
-			looping = !doGameDetection(_browser->getResult().getPath());
-		}
+			// looping = !doGameDetection(_browser->getResult().getPath());
+			looping = !doGameDetection(".");
+		// }
 	} while (looping);
+		ConfMan.setActiveDomain(_domains[0]);
+		close();
 }
 
 Common::String addGameToConf(const GameDescriptor &result) {
@@ -538,7 +542,8 @@ bool LauncherDialog::doGameDetection(const Common::String &path) {
 	//    dialog.
 
 	// User made his choice...
-	Common::FSNode dir(path);
+	// Common::FSNode dir(path);
+	Common::FSNode dir(".");
 	Common::FSList files;
 	if (!dir.getChildren(files, Common::FSNode::kListAll)) {
 		MessageDialog alert(_("ScummVM couldn't open the specified directory!"));
@@ -561,14 +566,15 @@ bool LauncherDialog::doGameDetection(const Common::String &path) {
 		// Exact match
 		idx = 0;
 	} else {
-		// Display the candidates to the user and let her/him pick one
-		StringArray list;
-		for (idx = 0; idx < (int)candidates.size(); idx++)
-			list.push_back(candidates[idx].description());
+		// // Display the candidates to the user and let her/him pick one
+		// StringArray list;
+		// for (idx = 0; idx < (int)candidates.size(); idx++)
+		// 	list.push_back(candidates[idx].description());
 
-		ChooserDialog dialog(_("Pick the game:"));
-		dialog.setList(list);
-		idx = dialog.runModal();
+		// ChooserDialog dialog(_("Pick the game:"));
+		// dialog.setList(list);
+		// idx = dialog.runModal();
+		idx = 0;
 	}
 	if (0 <= idx && idx < (int)candidates.size()) {
 		GameDescriptor result = candidates[idx];
@@ -580,7 +586,68 @@ bool LauncherDialog::doGameDetection(const Common::String &path) {
 
 		// Display edit dialog for the new entry
 		EditGameDialog editDialog(domain, result.description());
-		if (editDialog.runModal() > 0) {
+		// if (editDialog.runModal() > 0) {
+			// User pressed OK, so make changes permanent
+
+			// Write config to disk
+			ConfMan.set("easter_egg", "samnmax");
+			ConfMan.set("aspect_ratio", "false");
+			ConfMan.flushToDisk();
+
+			// Update the ListWidget, select the new item, and force a redraw
+			updateListing();
+			// selectTarget(editDialog.getDomain());
+			draw();
+		// } else {
+			// User aborted, remove the the new domain again
+			// ConfMan.removeGameDomain(domain);
+		// }
+
+	}
+
+	#ifdef N64_DOTT
+	Common::FSNode dir2("MANIAC");
+	Common::FSList files2;
+	if (!dir2.getChildren(files2, Common::FSNode::kListAll)) {
+		MessageDialog alert(_("ScummVM couldn't open the specified directory!"));
+		alert.runModal();
+		return true;
+	}
+
+	GameList candidates2(EngineMan.detectGames(files2));
+
+	int idx2;
+	if (candidates2.empty()) {
+		// No game was found in the specified directory
+		MessageDialog alert(_("ScummVM could not find any game in the specified directory!"));
+		alert.runModal();
+		idx2 = -1;
+		return false;
+	} else if (candidates2.size() == 1) {
+		// Exact match
+		idx2 = 0;
+	} else {
+		// // Display the candidates to the user and let her/him pick one
+		// StringArray list;
+		// for (idx = 0; idx < (int)candidates.size(); idx++)
+		// 	list.push_back(candidates[idx].description());
+
+		// ChooserDialog dialog(_("Pick the game:"));
+		// dialog.setList(list);
+		// idx = dialog.runModal();
+		idx2 = 0;
+	}
+	if (0 <= idx2 && idx2 < (int)candidates2.size()) {
+		GameDescriptor result2 = candidates2[idx2];
+
+		// TODO: Change the detectors to set "path" !
+		result2["path"] = "MANIAC";
+
+		Common::String domain2 = addGameToConf(result2);
+
+		// Display edit dialog for the new entry
+		EditGameDialog editDialog(domain2, result2.description());
+		// if (editDialog.runModal() > 0) {
 			// User pressed OK, so make changes permanent
 
 			// Write config to disk
@@ -588,14 +655,10 @@ bool LauncherDialog::doGameDetection(const Common::String &path) {
 
 			// Update the ListWidget, select the new item, and force a redraw
 			updateListing();
-			selectTarget(editDialog.getDomain());
+			// selectTarget(editDialog.getDomain());
 			draw();
-		} else {
-			// User aborted, remove the the new domain again
-			ConfMan.removeGameDomain(domain);
-		}
-
 	}
+	#endif
 
 	return true;
 }
