@@ -52,6 +52,7 @@ room TitleScreen {
             screenEffect(CommonLib::effect_dissolve());
             delay(60);
             playCDTrack(1,365,1,115067);
+            delay(10);
             startRoom(Home);
             return;
         }

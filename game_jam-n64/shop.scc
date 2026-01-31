@@ -81,6 +81,7 @@ room Shop {
             setObjectState(ResRoom::inventoryPopup, 0);
             putActorAt(bunbrush, 100, 100, Map);
             playCDTrack(1,365,1,115067);
+            delay(10);
             startRoom(Map);
             return;
         }
