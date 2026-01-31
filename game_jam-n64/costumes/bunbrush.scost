@@ -41,6 +41,21 @@ picture standW = {
     position = { -26, -78 }
 };
 
+picture pickupE = {
+    path = "../graphics/bunbrush/stand_E_pickup.bmp",
+    position = { -26, -78 }
+};
+
+picture pickupN = {
+    path = "../graphics/bunbrush/stand_N_pickup.bmp",
+    position = { -26, -78 }
+};
+
+picture pickupS = {
+    path = "../graphics/bunbrush/stand_S_pickup.bmp",
+    position = { -26, -78 }
+};
+
 limb talk_body;
 limb body;
 
@@ -67,4 +82,11 @@ anim init = {
     W = { body(standS) };
     N = { body(standS) };
     S = { body(standS) };
+};
+
+anim raiseArm @ 24 = {
+    E = { body(pickupE) !LOOP };
+    W = { body(pickupE) !LOOP };
+    N = { body(pickupN) !LOOP };
+    S = { body(pickupS) !LOOP };
 };

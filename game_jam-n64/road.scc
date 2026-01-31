@@ -58,12 +58,32 @@ room Road {
         verb(int vrb,int objA,int objB) {
         case Interact:
             if (!uncloggedLock) {
+                egoSay("Hey! There's a lump of putty in there. That wasn't there before. \w");
+                animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+                delay(20);
                 return;
             } else {
                 egoSay("Hey! There's a lump of putty in there. That wasn't there before. \w");
                 waitForMessage();
                 return;
             }
+            return;
+        }
+    }
+
+    object exit {
+        trans = 0;
+        x =   90;
+        y =  180;
+        w =   50;
+        h =   20;
+        name = "Head out";
+        dir = SOUTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            setObjectState(ResRoom::inventoryPopup, 0);
+            putActorAt(bunbrush, 200, 100, Map);
+            startRoom(Map);
             return;
         }
     }

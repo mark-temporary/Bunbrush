@@ -49,7 +49,7 @@ room TitleScreen {
             setObjectState(objA, 1);
             screenEffect(CommonLib::effect_dissolve());
             delay(60);
-            startRoom(Map);
+            startRoom(Shop);
             return;
         }
     }

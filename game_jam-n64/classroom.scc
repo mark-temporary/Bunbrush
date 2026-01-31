@@ -47,35 +47,89 @@ room ClassRoom {
         if(str) numActiveDialog++;
     }
 
-    object room2 {
+    object exit {
         trans = 0;
-        x = 220;
-        y =  100;
-        name = "Door";
+        x =  120;
+        y =   55;
+        w =   30;
+        h =   70;
+        name = "Exit school building";
         dir = SOUTH;
-        states = {
-            {32, 48, "graphics/room_items/map_pin.bmp",
-            {"graphics/room_items/map_pin-z.bmp"}}
-        };
-
-        state = 0;
-    }
-
-    object room3 {
-        trans = 0;
-        x = 35;
-        y =  155;
-        name = "Location 3";
-        dir = SOUTH;
-        states = {
-            {32, 48, "graphics/room_items/map_pin2.bmp",
-            {"graphics/room_items/map_pin2-z.bmp"}}
-        };
-        state = 1;
         verb(int vrb,int objA,int objB) {
         case Interact:
-            getDateTime();
-            sysPrint("The current time is %i{VAR_TIMEDATE_HOUR}:%i{VAR_TIMEDATE_MINUTE}");
+            setObjectState(ResRoom::inventoryPopup, 0);
+            putActorAt(bunbrush, 130, 170, Map);
+            startRoom(Map);
+            return;
+        }
+    }
+
+    object credit1 {
+        trans = 0;
+        x =  180;
+        y =   60;
+        w =   32;
+        h =   32;
+        dir = NORTH;
+        name = "Sandis (Bunbrush walk cycle)";
+    }
+
+    object credit2 {
+        trans = 0;
+        x =  220;
+        y =   50;
+        w =   64;
+        h =   64;
+        name = "Beanette Ibnishu Shiba (Initial background design and my general muse)";
+        dir = NORTH;
+    }
+
+    object credit3 {
+        trans = 0;
+        x =  470;
+        y =   50;
+        w =   40;
+        h =   40;
+        name = "Felipe Jorquera  \n (Musical composition)";
+        dir = NORTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            egoSay("Felipe Jorquera  \n (Musical composition)");
+            return;
+        }
+    }
+
+    object credit4 {
+        trans = 0;
+        x =  540;
+        y =   55;
+        w =   35;
+        h =   45;
+        name = "sloan604 \n (Sprite animation)";
+        dir = SOUTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+                    animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+                    delay(20);
+            egoSay("sloan604 \n (Sprite animation)");
+            return;
+        }
+    }
+
+
+    object credit5 {
+        trans = 0;
+        x =  685;
+        y =  115;
+        w =   64;
+        h =   64;
+        name = "Mark 'Happy-Ferret' Bauermeister \n (Code & General Design)";
+        dir = NORTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+                    animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+                    delay(20);
+            egoSay("Mark 'Happy-Ferret' Bauermeister \n (Code & General Design)");
             return;
         }
     }

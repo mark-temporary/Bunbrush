@@ -20,6 +20,5 @@
 
 
 room InventoryItems {
-    object inventoryObj;
     object plushy;
 }

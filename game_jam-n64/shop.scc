@@ -20,6 +20,7 @@
 #include <scummVars6.s>
 #include "common.sch"
 #include "road.sch"
+#include "map.sch"
 #include "inventoryitems.sch"
 #include "verbs.sch"
 #include "actors.sch"
@@ -63,6 +64,23 @@ room Shop {
         case Interact:
             getDateTime();
             sysPrint("The current time is %i{VAR_TIMEDATE_HOUR}:%i{VAR_TIMEDATE_MINUTE}");
+            return;
+        }
+    }
+
+    object exit {
+        trans = 0;
+        x =   50;
+        y =  180;
+        w =  200;
+        h =   20;
+        name = "Leave shop";
+        dir = SOUTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            setObjectState(ResRoom::inventoryPopup, 0);
+            putActorAt(bunbrush, 100, 100, Map);
+            startRoom(Map);
             return;
         }
     }

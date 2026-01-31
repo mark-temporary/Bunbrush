@@ -6,6 +6,11 @@ picture standing_w00 = {
     position = { -13, -42 }
 };
 
+picture talking_w00 = {
+    glob = "../graphics/turtle/talk_W_??.bmp",
+    position = { -13, -42 }
+};
+
 limb talk_body;
 limb body;
 
@@ -17,5 +22,16 @@ anim init = {
     N = { body(standing_w0000, standing_w0000, standing_w0001, standing_w0002, standing_w0002, standing_w0003, standing_w0001, standing_w0004, standing_w0005, standing_w0006),
           talk_body(HIDE) };
     S = { body(standing_w0000, standing_w0000, standing_w0001, standing_w0002, standing_w0002, standing_w0003, standing_w0001, standing_w0004, standing_w0005, standing_w0006),
+          talk_body(HIDE) };
+};
+
+anim talk = {
+    E = { body(talking_w0000, talking_w0001, talking_w0001, talking_w0002, talking_w0003, talking_w0004),
+          talk_body(HIDE) };
+    W = { body(talking_w0000, talking_w0001, talking_w0001, talking_w0002, talking_w0003, talking_w0004),
+          talk_body(HIDE) };
+    N = { body(talking_w0000, talking_w0001, talking_w0001, talking_w0002, talking_w0003, talking_w0004),
+          talk_body(HIDE) };
+    S = { body(talking_w0000, talking_w0001, talking_w0001, talking_w0002, talking_w0003, talking_w0004),
           talk_body(HIDE) };
 };

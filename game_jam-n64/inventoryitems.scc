@@ -23,16 +23,6 @@
 
 room InventoryItems {
 
-    object inventoryObj {
-        name = "Inventory";
-        verb(int vrb,int objA,int objB) {
-        case Interact:
-            getDateTime();
-            sysPrint("The current time is %i{VAR_TIMEDATE_HOUR}:%i{VAR_TIMEDATE_MINUTE}");
-            return;
-        }
-    }
-
     object plushy {
         w = 32;
         h = 32;

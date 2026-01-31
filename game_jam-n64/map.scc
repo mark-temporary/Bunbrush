@@ -84,7 +84,7 @@ room Map {
         setCurrentActor(bunbrush);
         setActorWalkSpeed( 10, 10 );
 
-        putActorAt(bunbrush,100,100,Map);
+        // putActorAt(bunbrush,100,100,Map);
 
         createBoxMatrix();
         cameraFollowActor(VAR_EGO);

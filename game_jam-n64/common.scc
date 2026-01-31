@@ -57,12 +57,6 @@ room ResRoom {
 
         // we run forever (well ... until someone kills the process)
         while(1) {
-            obj = getObjectAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y);
-            act = getActorAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y);
-            delay(1);
-            printAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y - 20);
-            print("%n{obj}%n{act}");
-
             unless(cursorOn) {
                 if(altVerb) {
                     setCurrentVerb(altVerb);
@@ -74,7 +68,8 @@ room ResRoom {
                         
             }
             if(isScriptRunning(VAR_SENTENCE_SCRIPT)) {
-                 breakScript();
+                waitForMessage();
+                breakScript();
                 continue;
             }
 
@@ -86,6 +81,10 @@ room ResRoom {
             desc = 0;
 
             obj = getObjectAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y);
+            act = getActorAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y);
+            delay(1);
+            printAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y - 20);
+            print("%n{obj}%n{act}");
 
             unless(obj) {
                 obj = getActorAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y);

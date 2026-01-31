@@ -17,6 +17,14 @@
  *
  */
 
+// Character costumes/animations
+#include "bunbrush_anim.sch"
+#include "turtle_anim.sch"
+
+// Global rooms
+// TODO: Clean up other scripts
+#include "map.sch"
+
 // The action verbs
 verb Interact;
 
@@ -67,7 +75,7 @@ int  *actorObject;
 
 // define actors
 actor bunbrush;
-#define BUNBRUSH_COLOR      231
+#define BUNBRUSH_COLOR       15
 #define BUNBRUSH_DIM_COLOR  232
 
 actor turtle;
