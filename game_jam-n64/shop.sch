@@ -19,6 +19,9 @@
 
 
 room Shop {
+    bit turtleIsBusy;
+    bit turtleIsDone;
+
     object bunbrushObj;
     object doorToClassRoomObj;
     object inventoryObj;

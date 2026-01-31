@@ -83,7 +83,14 @@ room ResRoom {
             obj = getObjectAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y);
             act = getActorAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y);
             delay(1);
-            printAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y - 20);
+
+            if (VAR_VIRT_MOUSE_X < 310) {
+                printAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y - 20);
+            } else if (VAR_VIRT_MOUSE_X < 540 ) {
+                printAt(VAR_VIRT_MOUSE_X - 250,VAR_VIRT_MOUSE_Y - 20);
+            } else {
+                printAt(VAR_VIRT_MOUSE_X - 450,VAR_VIRT_MOUSE_Y - 20);
+            }
             print("%n{obj}%n{act}");
 
             unless(obj) {

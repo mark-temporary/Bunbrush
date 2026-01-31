@@ -20,15 +20,16 @@
 #include <scummVars6.s>
 #include "common.sch"
 #include "road.sch"
+#include "home.sch"
 #include "inventoryitems.sch"
 #include "verbs.sch"
 #include "actors.sch"
 
 room Road {
     image = "graphics/rooms/street.bmp";
+    zplane = { "graphics/rooms/empty_room-z.bmp" };
 
     boxd = "graphics/rooms/street.box";
-    zplane = { "graphics/rooms/empty_room-z.bmp" };
 
     trans = 0;
 
@@ -67,6 +68,23 @@ room Road {
                 waitForMessage();
                 return;
             }
+            return;
+        }
+    }
+
+    object entrance {
+        trans = 0;
+        x =  110;
+        y =   85;
+        w =   30;
+        h =   50;
+        name = "Entrance to Bunbrush's Home";
+        dir = NORTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            setObjectState(ResRoom::inventoryPopup, 0);
+            putActorAt(bunbrush, 200, 100, Home);
+            startRoom(Home);
             return;
         }
     }
@@ -113,8 +131,6 @@ room Road {
 
         createBoxMatrix();
         cameraFollowActor(VAR_EGO);
-
-        playCDTrack(1,365,1,115067);
         
         if (uncloggedLock) {
             setObjectName(bush, "Bushes");

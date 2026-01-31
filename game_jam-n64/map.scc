@@ -88,7 +88,5 @@ room Map {
 
         createBoxMatrix();
         cameraFollowActor(VAR_EGO);
-
-        playCDTrack(1,365,1,115067);
     }
 }

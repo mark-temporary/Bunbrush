@@ -21,15 +21,14 @@
 #include <lib.sch>
 #include "common.sch"
 #include "classroom.sch"
+#include "shop.sch"
 #include "inventoryitems.sch"
 #include "verbs.sch"
 #include "actors.sch"
 
 room ClassRoom {
     image = "graphics/rooms/school.bmp";
-
     boxd = "graphics/rooms/school.box";
-    zplane = { "graphics/rooms/empty_room-z.bmp" };
 
     trans = 0;
 
@@ -54,7 +53,7 @@ room ClassRoom {
         w =   30;
         h =   70;
         name = "Exit school building";
-        dir = SOUTH;
+        dir = WEST;
         verb(int vrb,int objA,int objB) {
         case Interact:
             setObjectState(ResRoom::inventoryPopup, 0);
@@ -106,14 +105,7 @@ room ClassRoom {
         w =   35;
         h =   45;
         name = "sloan604 \n (Sprite animation)";
-        dir = SOUTH;
-        verb(int vrb,int objA,int objB) {
-        case Interact:
-                    animateActor(VAR_EGO, bunbrush_anim_raiseArm);
-                    delay(20);
-            egoSay("sloan604 \n (Sprite animation)");
-            return;
-        }
+        dir = NORTH;
     }
 
 
@@ -125,27 +117,61 @@ room ClassRoom {
         h =   64;
         name = "Mark 'Happy-Ferret' Bauermeister \n (Code & General Design)";
         dir = NORTH;
+    }
+
+    object screwdriver {
+        trans = 0;
+        x =   310;
+        y =   105;
+        name = "Screwdriver";
+        dir = EAST;
+        states = {
+            {0, 0, "graphics/room_items/screwdriver.bmp"}
+        };
+        state = 1;
         verb(int vrb,int objA,int objB) {
         case Interact:
-                    animateActor(VAR_EGO, bunbrush_anim_raiseArm);
-                    delay(20);
-            egoSay("Mark 'Happy-Ferret' Bauermeister \n (Code & General Design)");
+        if (!screwdriverTaken) {
+            animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+            setObjectState(objA, 0);
+            setObjectName(objA, "");
+            pickupObject(InventoryItems::plushy, InventoryItems);
+            screwdriverTaken = 1;
+            delay(20);
+            egoSay("What's this? There's a screwdriver lurking out from behind the glass case");
+            waitForMessage();
+            }
+            return;
+        }
+    }
+
+    object clock {
+        trans = 0;
+        x =  670;
+        y =   45;
+        w =   40;
+        h =   20;
+        name = "Old school clock";
+        dir = NORTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+        if (!Shop::turtleIsBusy) {
+            animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+            delay(20);
+            egoSay("Let's give this old clock a nudge ... Time flies");
+            waitForMessage();
+        }
             return;
         }
     }
 
     local script entry() {
-        // VAR_VERB_SCRIPT = MapInterfaceTemplate::inputHandler;
-
         Verbs::setupVerbs();
         Verbs::showVerbs(0);
         Actors::setupActors();
 
         putActorAt(bunbrush,100,100,ClassRoom);
 
-        // createBoxMatrix();
         cameraFollowActor(VAR_EGO);
-
-        playCDTrack(1,365,1,115067);
     }
 }

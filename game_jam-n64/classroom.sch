@@ -19,6 +19,8 @@
 
 
 room ClassRoom {
+    bit screwdriverTaken;
+
     object bunbrushObj;
     object doorToClassRoomObj;
     object inventoryObj;

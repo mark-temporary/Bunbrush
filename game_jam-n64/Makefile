@@ -21,6 +21,7 @@ GAME_NAME = game_jam-n64
 
 SRCS= common.scc \
       classroom.scc \
+      home.scc \
       road.scc \
       shop.scc \
       map.scc \
@@ -29,6 +30,7 @@ SRCS= common.scc \
       verbs.scc \
       actors.scc \
       title.scc \
+      outro.scc \
 
 MAK_DIR ?= .
 include $(MAK_DIR)/Makefile_inc.mak

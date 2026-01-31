@@ -27,9 +27,9 @@
 
 room Shop {
     image = "graphics/rooms/shop.bmp";
+    zplane = { "graphics/rooms/empty_room-z.bmp" };
 
     boxd = "graphics/rooms/shop.box";
-    zplane = { "graphics/rooms/empty_room-z.bmp" };
 
     trans = 0;
 
@@ -80,6 +80,7 @@ room Shop {
         case Interact:
             setObjectState(ResRoom::inventoryPopup, 0);
             putActorAt(bunbrush, 100, 100, Map);
+            playCDTrack(1,365,1,115067);
             startRoom(Map);
             return;
         }

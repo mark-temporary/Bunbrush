@@ -26,6 +26,8 @@
 #include "road.sch"
 #include "shop.sch"
 #include "map.sch"
+#include "home.sch"
+#include "outro.sch"
 
 bit commentary;
 
@@ -49,7 +51,8 @@ room TitleScreen {
             setObjectState(objA, 1);
             screenEffect(CommonLib::effect_dissolve());
             delay(60);
-            startRoom(Shop);
+            playCDTrack(1,365,1,115067);
+            startRoom(Home);
             return;
         }
     }
@@ -73,14 +76,6 @@ room TitleScreen {
             playCDTrack(2,1,1,499241);
             return;
         }
-    }
-
-        object plaque {
-        x = 17;
-        y = 181;
-        w = 40;
-        h = 16;
-        name = "Douglas was here";
     }
 
     // Hack until we get cursorPrint (B5) working properly
