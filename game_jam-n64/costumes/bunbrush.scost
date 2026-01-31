@@ -1,0 +1,70 @@
+palette([192-223]);
+flags = FLIP;
+
+picture walking_s00 = {
+    glob = "../graphics/bunbrush/walk_S_??.bmp",
+    position = { -26, -70 }
+};
+
+picture walking_n00 = {
+    glob = "../graphics/bunbrush/walk_N_??.bmp",
+    position = { -26, -70 }
+};
+
+picture walking_e00 = {
+    glob = "../graphics/bunbrush/walk_E_??.bmp",
+    position = { -26, -78 }
+};
+
+picture walking_w00 = {
+    glob = "../graphics/bunbrush/walk_E_??.bmp",
+    position = { -26, -78 }
+};
+
+picture standS = {
+    path = "../graphics/bunbrush/stand_S.bmp",
+    position = { -26, -70 }
+};
+
+picture standN = {
+    path = "../graphics/bunbrush/stand_N.bmp",
+    position = { -26, -70 }
+};
+
+picture standE = {
+    path = "../graphics/bunbrush/stand_E.bmp",
+    position = { -26, -78 }
+};
+
+picture standW = {
+    path = "../graphics/bunbrush/stand_E.bmp",
+    position = { -26, -78 }
+};
+
+limb talk_body;
+limb body;
+
+anim walk = {
+    E = { body(walking_e0000, walking_e0001, walking_e0002, walking_e0003),
+          talk_body(HIDE) };
+    W = { body(walking_w0000, walking_w0001, walking_w0002, walking_w0003),
+          talk_body(HIDE) };
+    S = { body(walking_s0000, walking_s0001, walking_s0002, walking_s0003),
+          talk_body(HIDE) };
+    N = { body(walking_n0000, walking_n0001, walking_n0002, walking_n0003),
+          talk_body(HIDE) };
+};
+
+anim stand = {
+    E = { body(standE), talk_body(SHOW) };
+    W = { body(standW), talk_body(SHOW) };
+    N = { body(standN), talk_body(SHOW) };
+    S = { body(standS), talk_body(SHOW) };
+};
+
+anim init = {
+    E = { body(standS) };
+    W = { body(standS) };
+    N = { body(standS) };
+    S = { body(standS) };
+};

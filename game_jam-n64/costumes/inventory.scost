@@ -1,0 +1,21 @@
+palette([224-255]);
+flags = FLIP;
+
+picture standS = {
+    path = "../graphics/inventory_items/inventory.bmp",
+    position = { 0, -31 }
+};
+
+limb talk_body;
+limb body;
+
+anim init = {
+    E = { body(standS),
+          talk_body(HIDE) };
+    W = { body(standS),
+          talk_body(HIDE) };
+    S = { body(standS),
+          talk_body(HIDE) };
+    N = { body(standS),
+          talk_body(HIDE) };
+};

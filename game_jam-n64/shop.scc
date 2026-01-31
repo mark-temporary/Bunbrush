@@ -1,0 +1,98 @@
+/* SCUNK
+ * Copyright (C) 2025 Mark Bauermeister
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include <scummVars6.s>
+#include "common.sch"
+#include "road.sch"
+#include "inventoryitems.sch"
+#include "verbs.sch"
+#include "actors.sch"
+
+room Shop {
+    image = "graphics/rooms/shop.bmp";
+
+    boxd = "graphics/rooms/shop.box";
+    zplane = { "graphics/rooms/empty_room-z.bmp" };
+
+    trans = 0;
+
+    // cycle Cycl = { 64, 0, 1, 2};
+
+    object room2 {
+        trans = 0;
+        x = 220;
+        y =  100;
+        name = "Door";
+        dir = SOUTH;
+        states = {
+            {32, 48, "graphics/room_items/map_pin.bmp",
+            {"graphics/room_items/map_pin-z.bmp"}}
+        };
+
+        state = 0;
+    }
+
+    object room3 {
+        trans = 0;
+        x = 35;
+        y =  155;
+        name = "Location 3";
+        dir = SOUTH;
+        states = {
+            {32, 48, "graphics/room_items/map_pin2.bmp",
+            {"graphics/room_items/map_pin2-z.bmp"}}
+        };
+        state = 0;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            getDateTime();
+            sysPrint("The current time is %i{VAR_TIMEDATE_HOUR}:%i{VAR_TIMEDATE_MINUTE}");
+            return;
+        }
+    }
+
+    object inventoryObj {
+        name = "Inventory";
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            if (getObjectState(ResRoom::inventoryPopup) == 0) {
+                setObjectState(ResRoom::inventoryPopup, 1);
+            } else {
+                setObjectState(ResRoom::inventoryPopup, 0);
+            }
+            return;
+        }
+    }
+
+    local script entry() {
+        Verbs::setupVerbs();
+        Verbs::showVerbs(0);
+        Actors::setupActors();
+
+        putActorAt(bunbrush,100,100,Shop);
+        putActorAt(inventory, 10, 190,Shop);
+
+        actorObject[inventory] = inventoryObj;
+
+        createBoxMatrix();
+        cameraFollowActor(VAR_EGO);
+
+        playCDTrack(4,1,1,72000);
+    }
+}

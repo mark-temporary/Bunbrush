@@ -1,0 +1,112 @@
+/* SCUNK
+ * Copyright (C) 2025 Mark Bauermeister
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include <scummVars6.s>
+#include "common.sch"
+#include "title.sch"
+#include "verbs.sch"
+#include "actors.sch"
+#include "classroom.sch"
+#include "road.sch"
+#include "shop.sch"
+#include "map.sch"
+
+bit commentary;
+
+room TitleScreen {
+    image = "graphics/rooms/title.bmp";
+    boxd = "graphics/rooms/empty_room.box";
+    trans = 0;
+    
+    object option_normal {
+        trans = 0;
+        x =  64;
+        y =  83;
+        dir = SOUTH;
+        states = {
+            {0, 0, "graphics/room_items/bunny.bmp"}
+        };
+        // state = 0;
+
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            setObjectState(objA, 1);
+            screenEffect(CommonLib::effect_dissolve());
+            delay(60);
+            startRoom(Map);
+            return;
+        }
+    }
+
+    object option_easy {
+        trans = 0;
+        x =   72;
+        y =  150;
+        dir = SOUTH;
+        states = {
+            {0, 0, "graphics/room_items/bunny.bmp"}
+        };
+        // state = 0;
+
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            if (commentary != 1) {
+            setObjectState(objA, 1);
+            commentary = 1;
+            }
+            playCDTrack(2,1,1,499241);
+            return;
+        }
+    }
+
+        object plaque {
+        x = 17;
+        y = 181;
+        w = 40;
+        h = 16;
+        name = "Douglas was here";
+    }
+
+    // Hack until we get cursorPrint (B5) working properly
+    // Function repeatedly calls itself to keep text on screen.
+    local script printIntro() {
+        cursorPrintBegin();
+        cursorPrintColor(255);
+        initCharset(ResRoom::chtest);
+        cursorPrintAt(50, 20);
+        cursorPrint("Bunbrush in Operation Friendship Repair");
+        cursorPrintAt(100, 95);
+        cursorPrint("Play");
+        cursorPrintAt(100, 163);
+        cursorPrint("Director's Commentary");
+        cursorPrintEnd();
+        // print("MONKEY ISLAND 2\\xFE\\x01 `I want it all\\\\  All the\\xFE\\x01  puzzles\\\\  All the work\\\\");
+        
+        delay(1);
+        printIntro();
+    }
+
+    local script entry() {
+        Verbs::setupVerbs();
+        Actors::setupActors();
+        setCursorTransparency(0);                
+        printIntro();
+        playCDTrack(3,365,1,3002382000);
+    }
+}

@@ -1,0 +1,111 @@
+/* SCUNK
+ * Copyright (C) 2025  Mark Bauermeister
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include <scummVars6.s>
+#include "common.sch"
+#include "actors.sch"
+#include "inventoryitems.sch"
+#include "classroom.sch"
+#include "road.sch"
+#include "shop.sch"
+
+room Actors {
+    cost bunbrushCost = "bunbrush.cost";
+    cost turtleCost = "turtle.cost";
+    cost inventoryCost = "inventory.cost";
+
+    object bunbrushObj;
+    object turtleObj;
+    object inventoryObj;
+
+    object inventoryObj {
+        name = "Inventory";
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            getDateTime();
+            sysPrint("The current time is %i{VAR_TIMEDATE_HOUR}:%i{VAR_TIMEDATE_MINUTE}");
+            return;
+        }
+    }
+    
+    // set an empty actor
+    script setupActors() {
+        
+        // Bunbrush
+        setCurrentActor(bunbrush);
+        initActor();
+        setActorTalkColor(BUNBRUSH_COLOR);
+        setActorCostume(bunbrushCost);
+        setActorAnimSpeed(4);
+        setActorWalkSpeed( 5, 5 );
+        setActorElevation(0);
+        setObjectClass(bunbrush, [ 0x80 + Person ]);
+        actorObject[bunbrush] = bunbrushObj;
+
+        // set VAR_EGO so we can use the *Ego* functions
+        VAR_EGO = bunbrush;
+
+        // place our items in the player's inventory
+        // pickupObject( InventoryItems::plushy, InventoryItems );
+        invOffset = 0;
+
+
+        // Mr. Turtle
+        setCurrentActor(turtle);
+        initActor();
+        setActorCostume(turtleCost);
+        setActorName("Mr. Turtle");
+        setActorAnimSpeed( 6 );
+        setActorTalkColor(TURTLE_COLOR);
+        setObjectClass(turtle, [ 0x80 + Person ]);
+        // actorObject[turtle] = ClassRoom::turtleObj;
+        putActorAt(turtle,200,130,Shop);
+        setActorElevation(20);
+
+        // The inventory icon
+        // In Lucas Arts tradition, the inventory is an actor with a static costume
+        setCurrentActor(inventory);
+        initActor();
+        setActorCostume(inventoryCost);
+        setObjectClass(inventory, [ 0x80 + Person ]);
+        setActorIgnoreBoxes();
+        actorObject[inventory] = Road::inventoryObj;
+
+        // Inside ClassRoom we need a script that checks camera/ego position and puts actor accordingly (i e x=192)
+        putActorAt(inventory,10,200,Road);
+        setActorElevation(1);
+
+        setCurrentActor(VAR_EGO);
+    }
+
+    // This script is called on pre-entry to load the actor
+    // objects from this room
+    script loadObjects() {
+        loadFlObject(bunbrushObj,Actors);
+        // loadFlObject(inventoryObj,Actors);
+    }
+
+    object bunbrushObj {
+        name = "Bunbrush";
+    }
+
+    object turtleObj {
+        name = "Mr. Turtle";
+    }
+}

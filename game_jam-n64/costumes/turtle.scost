@@ -1,0 +1,21 @@
+palette([192-223]);
+flags = FLIP;
+
+picture standing_w00 = {
+    glob = "../graphics/turtle/stand_W_??.bmp",
+    position = { -13, -42 }
+};
+
+limb talk_body;
+limb body;
+
+anim init = {
+    E = { body(standing_w0000, standing_w0000, standing_w0001, standing_w0002, standing_w0002, standing_w0003, standing_w0001, standing_w0004, standing_w0005, standing_w0006),
+          talk_body(HIDE) };
+    W = { body(standing_w0000, standing_w0000, standing_w0001, standing_w0002, standing_w0002, standing_w0003, standing_w0001, standing_w0004, standing_w0005, standing_w0006),
+          talk_body(HIDE) };
+    N = { body(standing_w0000, standing_w0000, standing_w0001, standing_w0002, standing_w0002, standing_w0003, standing_w0001, standing_w0004, standing_w0005, standing_w0006),
+          talk_body(HIDE) };
+    S = { body(standing_w0000, standing_w0000, standing_w0001, standing_w0002, standing_w0002, standing_w0003, standing_w0001, standing_w0004, standing_w0005, standing_w0006),
+          talk_body(HIDE) };
+};

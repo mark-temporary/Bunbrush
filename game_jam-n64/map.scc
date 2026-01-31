@@ -1,0 +1,94 @@
+/* SCUNK
+ * Copyright (C) 2025 Mark Bauermeister
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ *
+ */
+
+#include <scummVars6.s>
+#include "common.sch"
+#include "classroom.sch"
+#include "inventoryitems.sch"
+#include "verbs.sch"
+#include "actors.sch"
+#include "shop.sch"
+#include "road.sch"
+
+room Map {
+    image = "graphics/rooms/map.bmp";
+
+    boxd = "graphics/rooms/map.box";
+
+    trans = 0;
+
+    object room1 {
+        trans = 0;
+        x = 155;
+        y =  90;
+        w =  30;
+        h =  30;
+        name = "Bunbrush's Home";
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            startRoom(Road);
+            return;
+        }
+    }
+
+    object room2 {
+        trans = 0;
+        x =  90;
+        y =  90;
+        w =  30;
+        h =  30;
+        name = "Mr. Turtle's Shop";
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            startRoom(Shop);
+            return;
+        }
+    }
+
+    object room3 {
+        trans = 0;
+        x = 115;
+        y =  150;
+        w =   30;
+        h =   30;
+        name = "The Old School";
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            startRoom(ClassRoom);
+            return;
+        }
+    }
+
+    local script entry() {
+        // VAR_VERB_SCRIPT = MapInterfaceTemplate::inputHandler;
+
+        Verbs::setupVerbs();
+        Verbs::showVerbs(0);
+        // Actors::setupActors();
+        setCurrentActor(bunbrush);
+        setActorWalkSpeed( 10, 10 );
+
+        putActorAt(bunbrush,100,100,Map);
+
+        createBoxMatrix();
+        cameraFollowActor(VAR_EGO);
+
+        playCDTrack(1,365,1,115067);
+    }
+}
