@@ -27,3 +27,14 @@ In addition you'll also need Docker, [ucon64](https://ucon64.sourceforge.io/), t
 ## Note about `make tentacle`
 
 Don't worry if **scc** throws `cp: cannot stat 'tentacle.sou': No such file or directory`. The game doesn't use it and the build should still have succeeded.
+
+
+## How my title tries to adhere to the theme:
+
+The theme is "Repair" and my game is all about repairing things, be it physical items or disrupted relationships.
+
+The full version of my game will see the protagonist repair a bridge to the other side of the river, fix a friendship that fell apart over the destruction of a special item, as well as see the repair of said item.
+
+Unfortunately, I wasn't able to work on this entry for more than a week out of the entire 64Brew submission period due to my dire private situation.
+
+If you'd like to see more of my work, check out my [YouTube](https://youtube.com/@markbauermeister5449).
