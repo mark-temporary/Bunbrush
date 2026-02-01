@@ -33,7 +33,7 @@ room Outro {
     boxd = "graphics/rooms/empty_room.box";
     trans = 0;
 
-    sound outro = "voices/outro.voc";
+    cycle Cycl = { 13, 0, 32, 43};
 
     // Hack until we get cursorPrint (B5) working properly
     // Function repeatedly calls itself to keep text on screen.
@@ -47,7 +47,6 @@ room Outro {
     local script entry() {
         setCursorTransparency(0);                
         printOutro();
-        playCDTrack(1,365,1,115067);
-        startSound(outro);
+        playCDTrack(5,1,1,305067);
     }
 }
