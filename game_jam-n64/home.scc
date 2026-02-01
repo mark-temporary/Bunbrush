@@ -30,23 +30,51 @@ room Home {
     zplane = { "graphics/rooms/empty_room-z.bmp" };
 
     boxd = "graphics/rooms/home.box";
-
     trans = 0;
 
-    // cycle Cycl = { 64, 0, 1, 2};
+    sound dropkeySnd = "voices/dropkey.voc";
+    sound puttySnd = "voices/putty.voc";
 
-    object room2 {
+    object door {
         trans = 0;
-        x = 220;
-        y =  100;
+        x =  190;
+        y =   65;
+        w =   60;
+        h =   90;
         name = "Door";
-        dir = SOUTH;
-        states = {
-            {32, 48, "graphics/room_items/map_pin.bmp",
-            {"graphics/room_items/map_pin-z.bmp"}}
-        };
-
-        state = 0;
+        dir = NORTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            if (getObjectOwner(InventoryItems::screwdriver) == VAR_EGO & !uncloggedLock) {
+                uncloggedLock = 1;
+                animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+                delay(20);
+                startSound(dropkeySnd);
+                egoSay("Let's plop that keyhole");
+                waitForMessage();
+            } else if (getObjectOwner(InventoryItems::putty) == VAR_EGO & uncloggedLock) {
+                setObjectOwner(InventoryItems::putty, 0);
+                setObjectOwner(InventoryItems::puttyWithKeyPrint, VAR_EGO);
+                animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+                delay(20);
+                startSound(puttySnd);
+                egoSay("Let's get a print of the inside of that keyhole");
+                waitForMessage();
+            } else if (getObjectOwner(InventoryItems::puttyWithKeyPrint) == VAR_EGO) {
+                animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+                delay(20);
+                startSound(puttySnd);
+                egoSay("That plopping sound is soooo satisfying");
+                waitForMessage();
+            } else if (uncloggedLock) {
+                egoSay("I unclogged the keyhole!");
+                waitForMessage();
+            } else {
+                egoSay("Somebody broke off a key. Did I do that?");
+                waitForMessage();
+            }
+            return;
+        }
     }
 
     object exit {

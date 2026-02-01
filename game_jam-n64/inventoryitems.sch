@@ -20,5 +20,7 @@
 
 
 room InventoryItems {
-    object plushy;
+    object screwdriver;
+    object putty;
+    object puttyWithKeyPrint;
 }

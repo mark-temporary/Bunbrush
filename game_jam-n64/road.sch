@@ -19,8 +19,6 @@
 
 
 room Road {
-    bit uncloggedLock;
-
     object bunbrushObj;
     object doorToClassRoomObj;
     object inventoryObj;

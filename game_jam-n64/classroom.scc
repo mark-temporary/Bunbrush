@@ -32,6 +32,8 @@ room ClassRoom {
 
     trans = 0;
 
+    sound pickupSnd = "voices/pickup.voc";
+
     // cycle Cycl = { 64, 0, 1, 2};
 
     script textAdd(char* str) {
@@ -91,11 +93,6 @@ room ClassRoom {
         h =   40;
         name = "Felipe Jorquera  \n (Musical composition)";
         dir = NORTH;
-        verb(int vrb,int objA,int objB) {
-        case Interact:
-            egoSay("Felipe Jorquera  \n (Musical composition)");
-            return;
-        }
     }
 
     object credit4 {
@@ -135,7 +132,8 @@ room ClassRoom {
             animateActor(VAR_EGO, bunbrush_anim_raiseArm);
             setObjectState(objA, 0);
             setObjectName(objA, "");
-            pickupObject(InventoryItems::plushy, InventoryItems);
+            pickupObject(InventoryItems::screwdriver, InventoryItems);
+            startSound(pickupSnd);
             screwdriverTaken = 1;
             delay(20);
             egoSay("What's this? There's a screwdriver lurking out from behind the glass case");
@@ -147,19 +145,25 @@ room ClassRoom {
 
     object clock {
         trans = 0;
-        x =  670;
+        x =  680;
         y =   45;
-        w =   40;
-        h =   20;
         name = "Old school clock";
         dir = NORTH;
+        states = {
+            {0, 0, "graphics/room_items/clockface.bmp"}
+        };
+        state = 0;
         verb(int vrb,int objA,int objB) {
         case Interact:
-        if (!Shop::turtleIsBusy) {
+        if (Shop::turtleIsBusy) {
+            Shop::turtleIsDone = 1;
             animateActor(VAR_EGO, bunbrush_anim_raiseArm);
             delay(20);
+            setObjectState(objA, 1);
             egoSay("Let's give this old clock a nudge ... Time flies");
             waitForMessage();
+        } else {
+            egoSay("It's still early");
         }
             return;
         }

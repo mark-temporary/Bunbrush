@@ -28,11 +28,12 @@
 #include "text/en.sch"
 
 room ResRoom {
-    image = "graphics/rooms/shop.bmp";
+    image = "graphics/rooms/home.bmp";
 
     boxd = "graphics/rooms/empty_room.box";
     zplane = { "graphics/rooms/empty_room-z.bmp" };
     trans = 0;
+
     // cycle Cycl = { 10, 0, 102, 110};
     // Define the charset we are going to use
     // The GUI uses the first charset, so be sure to force its address
@@ -86,6 +87,8 @@ room ResRoom {
 
             if (VAR_VIRT_MOUSE_X < 310) {
                 printAt(VAR_VIRT_MOUSE_X,VAR_VIRT_MOUSE_Y - 20);
+            } else if (VAR_VIRT_MOUSE_X < 385 ) {
+                printAt(VAR_VIRT_MOUSE_X - 150,VAR_VIRT_MOUSE_Y - 20);
             } else if (VAR_VIRT_MOUSE_X < 540 ) {
                 printAt(VAR_VIRT_MOUSE_X - 250,VAR_VIRT_MOUSE_Y - 20);
             } else {

@@ -23,21 +23,43 @@
 
 room InventoryItems {
 
-    object plushy {
+    object screwdriver {
         w = 32;
         h = 32;
         x = 0;
-        name = "plush bunny";
+        name = "Screwdriver";
         states = {
-            { 0, 0, "graphics/inventory_items/bunny.bmp" }
+            { 0, 0, "graphics/inventory_items/screwdriver.bmp" }
         };
         state = 1;
 
         verb(int vrb,int objA,int objB) {
         case Interact:
-            egoSay("Standard issue hand scanner.");
+            egoSay("A trusty screwdriver");
             waitForMessage();
             return;
         }
+    }
+
+    object putty {
+        w = 32;
+        h = 32;
+        x = 0;
+        name = "A ball of putty";
+        states = {
+            { 0, 0, "graphics/inventory_items/putty.bmp" }
+        };
+        state = 1;
+    }
+
+    object puttyWithKeyPrint {
+        w = 32;
+        h = 32;
+        x = 0;
+        name = "Putty with the shape of a skeleton key imprinted in it";
+        states = {
+            { 0, 0, "graphics/inventory_items/screwdriver.bmp" }
+        };
+        state = 1;
     }
 }
