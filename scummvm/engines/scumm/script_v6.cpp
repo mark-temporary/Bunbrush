@@ -1939,7 +1939,7 @@ void ScummEngine_v6::o6_verbOps() {
 					break;
 			}
 			if (slot == _numVerbs)
-				error("Too many verbs");
+				warning("Too many verbs");
 			_curVerbSlot = slot;
 		}
 		vs = &_verbs[slot];
