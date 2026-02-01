@@ -29,7 +29,7 @@ In addition you'll also need Docker, [ucon64](https://ucon64.sourceforge.io/), t
 Don't worry if **scc** throws `cp: cannot stat 'tentacle.sou': No such file or directory`. The game doesn't use it and the build should still have succeeded.
 
 
-## How my title tries to adhere to the theme:
+## How my title tries to adhere to the theme
 
 The theme is "Repair" and my game is all about repairing things, be it physical items or disrupted relationships.
 
@@ -38,3 +38,11 @@ The full version of my game will see the protagonist repair a bridge to the othe
 Unfortunately, I wasn't able to work on this entry for more than a week out of the entire 64Brew submission period due to my dire private situation.
 
 If you'd like to see more of my work, check out my [YouTube](https://youtube.com/@markbauermeister5449).
+
+## Note on the inventory system
+
+Unfortunately, I wasn't able to finish the inventory system.
+The grand vision is to copy the design of Sam & Max Hit the Road.
+
+In the absence of a properly refined inventory system, the game will simply assume the correct action if Bunbrush's inventory holds the required item
+when the player interacts with an object in the room.
