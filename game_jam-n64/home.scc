@@ -70,6 +70,7 @@ room Home {
                 egoSay("I unclogged the keyhole!");
                 waitForMessage();
             } else {
+                checkedDoor = 1;
                 egoSay("Somebody broke off a key. Did I do that?");
                 waitForMessage();
             }

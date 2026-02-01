@@ -20,6 +20,7 @@
 
 room Home {
     bit uncloggedLock;
+    bit checkedDoor;
 
     object bunbrushObj;
     object inventoryObj;

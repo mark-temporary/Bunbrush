@@ -25,6 +25,9 @@
 #include "verbs.sch"
 #include "actors.sch"
 #include "shop.sch"
+#include "dialog.sch"
+#include "home.sch"
+#include "outro.sch"
 
 room Shop {
     image = "graphics/rooms/shop.bmp";
@@ -49,7 +52,7 @@ room Shop {
                 startSound(puttySnd);
                 actorSay(turtle, "Thank you, Bunbrush! Now come back later.");
                 waitForMessage();
-            } else if (turtleIsBusy) {
+            } else if (turtleIsBusy & !turtleIsDone) {
                 rnd = getRandomNumber(3);
                 switch(rnd) {
                     case 1:
@@ -65,6 +68,12 @@ room Shop {
                         waitForMessage();
                         break;
                 }
+            } else if (turtleIsDone) {
+                actorSay(turtle, "There you go! Don't break it again and go home now. Buniver probably misses you, mate.");
+                waitForMessage();
+                startRoom(Outro);
+            } else {
+                turtleConvo();
             }
             return;
         }
@@ -116,5 +125,125 @@ room Shop {
         cameraFollowActor(VAR_EGO);
 
         playCDTrack(4,1,1,72000);
+    }
+
+    local script turtleConvo() {
+            char* sentence;
+            int event;
+            cutscene(0) {
+                if (talkedBefore) {
+                    actorSay(turtle, "Hey, Bunbrush! Back so soon?");
+                    waitForMessage();
+                } else {
+                    actorSay(turtle, "Hello, Bunbrush! Long time no see! How are you?");
+                    waitForMessage();
+                }
+            }
+            dialogLoop: while(1) {
+                // sentence = 0;
+                // sentence[0] = dOptCob0A;
+                // Dialog::dialogAdd(sentence);
+
+                if (Home::checkedDoor) {
+                    sentence = 0;
+                    sentence[0] = "I can't get into my home. The key broke off";
+                    Dialog::dialogAdd(sentence);
+                    sentence = 0;
+                } else if (!convoTopicBuniver) {
+                    sentence = 0;
+                    sentence[0] = "I'm fine. You yourself?";
+                    Dialog::dialogAdd(sentence);
+                    sentence = 0;
+                } else {
+                    sentence = 0;
+                    sentence[0] = "We don't talk anymore. Ever since ... the incident";
+                    Dialog::dialogAdd(sentence);
+                    sentence = 0;
+                }
+
+                if (!convoTopicFullgame) {
+                    sentence[0] = "How's business?";
+                    Dialog::dialogAdd(sentence);
+                    sentence = 0;
+                } else if (convoTopicFullgame & !convoTopicDreamdisc) {
+                    sentence[0] = "The what??";
+                    Dialog::dialogAdd(sentence);
+                    sentence = 0;
+                } else if (convoTopicDreamdisc & !convoTopicSCUNK) {
+                    sentence[0] = "Dreamdisc?";
+                    Dialog::dialogAdd(sentence);
+                    sentence = 0;
+                } else if (convoTopicFullgame & convoTopicDreamdisc & convoTopicSCUNK & !convoTopicAll){
+                    sentence[0] = "What's SCUNK?";
+                    Dialog::dialogAdd(sentence);
+                    sentence = 0;
+                } else if (convoTopicAll) {
+                    sentence[0] = "That's all just nuts!";
+                    Dialog::dialogAdd(sentence);
+                    sentence = 0;
+                }
+
+                sentence[0] = "See ya!";
+                Dialog::dialogAdd(sentence);
+                sentence = 0;
+
+                Dialog::dialogStart(BUNBRUSH_DIM_COLOR,BUNBRUSH_COLOR);
+                do breakScript() while(selectedSentence < 0);
+                Dialog::dialogHide();
+                cutscene() {
+                    switch(selectedSentence) {
+                    case 0: 
+                        if (Home::checkedDoor) {
+                            actorSay(turtle, "Oh no! Well... Don't fret! Bring me a print of your key and we'll fix this");
+                            waitForMessage();
+                            break;
+                        } else if (!convoTopicBuniver) {
+                            convoTopicBuniver = 1;
+                            actorSay(turtle, "Having a bit of a supply crisis if you can't tell. Nothing is in stock. How's your mate Buniver?");
+                            waitForMessage();
+                            break;
+                        } else {
+                            actorSay(turtle, "Oh come now, mate! It was just a silly trading card! Give it a rest, go home now and call him!");
+                            waitForMessage();
+                            break;
+                        }
+                    case 1:
+                        if (!convoTopicFullgame) {
+                            convoTopicFullgame = 1;
+                            actorSay(turtle, "Totally sold out of everything. Can't wait for the full version.");
+                            waitForMessage();
+                            break;
+                        } else if (convoTopicFullgame & !convoTopicDreamdisc) {
+                            convoTopicDreamdisc = 1;
+                            actorSay(turtle, "You know. The full version of this game. When that fella is finally releasing his SCUNK engine to the public. Can't wait for the Dreamdisc release either");
+                            waitForMessage();
+                            break;
+                        } else if (convoTopicDreamdisc & !convoTopicSCUNK) {
+                            convoTopicSCUNK = 1;
+                            actorSay(turtle, "Another one of these fancy retro consoles you hip kids are all using. They say it has 128 bits. Whatever that means");
+                            waitForMessage();
+                            break;
+                        } else if (convoTopicFullgame & convoTopicDreamdisc & convoTopicSCUNK & !convoTopicAll) {
+                            convoTopicAll = 1;
+                            actorSay(turtle, "It's inspired by those fine gentleman at some ancient film company. A game engine for those who can't let go of the past. Hehe");
+                            waitForMessage();
+                            break;
+                        } else if (convoTopicAll) {
+                            actorSay(turtle, "I know. Nerds, right?...");
+                            waitForMessage();
+                            break;
+                        }
+                    case 2:
+                        talkedBefore = 1;
+                        actorSay(turtle, "See ya around");
+                        waitForMessage();
+                        break;
+                    }
+                    waitForMessage();
+                }
+                Dialog::dialogClear(1);
+                if(selectedSentence == 2) break dialogLoop;
+            }
+            Dialog::dialogEnd();
     }
 }

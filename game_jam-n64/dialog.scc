@@ -102,9 +102,10 @@ room Dialog {
             setCurrentVerb(dialogVerb0 + d);
             initVerb();
             setVerbNameString(dialogList[i]);
-            setVerbXY(12,145+11*d);
+            setVerbXY(40,0+11*d);
             setVerbColor(dialogColor);
             setVerbHiColor(dialogHiColor);
+            setVerbBackColor(4);
             setVerbOn();
             redrawVerb();
             v++, d++;
@@ -234,7 +235,7 @@ room Dialog {
 
     script dialogEnd() {
         dialogHide();
-        Verbs::showVerbs(1);
+        // Verbs::showVerbs(1);
         VAR_VERB_SCRIPT = ResRoom::inputHandler;
         // Restart the mouse watching thread
         ResRoom::mouseWatch();

@@ -22,11 +22,21 @@ room Shop {
     bit turtleIsBusy;
     bit turtleIsDone;
 
+    bit talkedBefore;
+    bit convoTopicBuniver;
+    bit convoTopicFullgame;
+    bit convoTopicDreamdisc;
+    bit convoTopicSCUNK;
+    bit convoTopicAll;
+
     object bunbrushObj;
     object doorToClassRoomObj;
     object inventoryObj;
     object turtleObj;
 
+    local script turtleConvo();
+
 int dist;
 int numText, numActiveDialog;
+
 }
