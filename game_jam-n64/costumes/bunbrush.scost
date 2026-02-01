@@ -63,7 +63,7 @@ picture talking_w00 = {
 
 picture talking_s00 = {
     glob = "../graphics/bunbrush/stand_S_talk_??.bmp",
-    position = { -26, -78 }
+    position = { -26, -70 }
 };
 
 limb talk_body;
@@ -106,7 +106,8 @@ anim talk = {
           talk_body(HIDE) };
     W = { body(talking_w0000, talking_w0001),
           talk_body(HIDE) };
-    N = { body(standN) };
+    N = { body(talking_s0000, talking_s0001, talking_s0002),
+          talk_body(HIDE) };
     S = { body(talking_s0000, talking_s0001, talking_s0002),
           talk_body(HIDE) };
 };

@@ -84,7 +84,7 @@ room Shop {
 
     object exit {
         trans = 0;
-        x =   50;
+        x =  160;
         y =  180;
         w =  200;
         h =   20;
@@ -151,10 +151,6 @@ room Shop {
                 }
             }
             dialogLoop: while(1) {
-                // sentence = 0;
-                // sentence[0] = dOptCob0A;
-                // Dialog::dialogAdd(sentence);
-
                 if (Home::checkedDoor) {
                     sentence = 0;
                     sentence[0] = "I can't get into my home. The key broke off";
@@ -254,10 +250,12 @@ room Shop {
                             waitForMessage();
                             break;
                         } else if (convoTopicAll) {
+                            actorFace(bunbrush, turtle);
                             egoSay("That's all just nuts!");
                             waitForMessage();
                             actorSay(turtle, "I know. Nerds, right?...");
                             waitForMessage();
+                            actorTurnToDirection(SOUTH);
                             egoSay("Yea... Nerds. Always behind their screens...");
                             waitForMessage();
                             break;
