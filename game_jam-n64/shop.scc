@@ -24,6 +24,7 @@
 #include "inventoryitems.sch"
 #include "verbs.sch"
 #include "actors.sch"
+#include "shop.sch"
 
 room Shop {
     image = "graphics/rooms/shop.bmp";
@@ -33,37 +34,38 @@ room Shop {
 
     trans = 0;
 
-    // cycle Cycl = { 64, 0, 1, 2};
+    sound puttySnd = "voices/putty.voc";
 
-    object room2 {
-        trans = 0;
-        x = 220;
-        y =  100;
-        name = "Door";
-        dir = SOUTH;
-        states = {
-            {32, 48, "graphics/room_items/map_pin.bmp",
-            {"graphics/room_items/map_pin-z.bmp"}}
-        };
-
-        state = 0;
-    }
-
-    object room3 {
-        trans = 0;
-        x = 35;
-        y =  155;
-        name = "Location 3";
-        dir = SOUTH;
-        states = {
-            {32, 48, "graphics/room_items/map_pin2.bmp",
-            {"graphics/room_items/map_pin2-z.bmp"}}
-        };
-        state = 0;
+    object turtleObj {
+        name = "Mr. Turtle";
         verb(int vrb,int objA,int objB) {
+        int rnd;
         case Interact:
-            getDateTime();
-            sysPrint("The current time is %i{VAR_TIMEDATE_HOUR}:%i{VAR_TIMEDATE_MINUTE}");
+            if (getObjectOwner(InventoryItems::puttyWithKeyPrint) == VAR_EGO & !turtleIsBusy) {
+                setObjectOwner(InventoryItems::puttyWithKeyPrint, 0);
+                animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+                turtleIsBusy = 1;
+                delay(20);
+                startSound(puttySnd);
+                actorSay(turtle, "Thank you, Bunbrush! Now come back later.");
+                waitForMessage();
+            } else if (turtleIsBusy) {
+                rnd = getRandomNumber(3);
+                switch(rnd) {
+                    case 1:
+                        actorSay(turtle, "I'm not done yet. Come back in a moment!");
+                        waitForMessage();
+                        break;
+                    case 2:
+                        actorSay(turtle, "Come back later, Bunbrush...");
+                        waitForMessage();
+                        break;
+                    case 3:
+                        actorSay(turtle, "If you want me to work faster, you might have to turn the clock.");
+                        waitForMessage();
+                        break;
+                }
+            }
             return;
         }
     }

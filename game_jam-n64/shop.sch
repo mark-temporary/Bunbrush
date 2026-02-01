@@ -25,6 +25,7 @@ room Shop {
     object bunbrushObj;
     object doorToClassRoomObj;
     object inventoryObj;
+    object turtleObj;
 
 int dist;
 int numText, numActiveDialog;

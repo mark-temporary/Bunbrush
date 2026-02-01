@@ -73,10 +73,12 @@ room Actors {
         setActorName("Mr. Turtle");
         setActorAnimSpeed( 6 );
         setActorTalkColor(TURTLE_COLOR);
+        setActorTalkFrame(turtle_anim_talk, turtle_anim_init);
         setObjectClass(turtle, [ 0x80 + Person ]);
         // actorObject[turtle] = ClassRoom::turtleObj;
         putActorAt(turtle,200,130,Shop);
         setActorElevation(20);
+        actorObject[turtle] = Shop::turtleObj;
 
         // The inventory icon
         // In Lucas Arts tradition, the inventory is an actor with a static costume

@@ -83,6 +83,12 @@ room ClassRoom {
         h =   64;
         name = "Beanette Ibnishu Shiba (Initial background design and my general muse)";
         dir = NORTH;
+        verb(int vrb,int objA,int objB) {
+        case Interact:
+            egoSay("Behind that painting lies the most beautiful woman alive");
+            waitForMessage();
+            return;
+        }
     }
 
     object credit3 {
