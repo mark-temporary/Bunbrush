@@ -24,6 +24,7 @@
 #include "inventoryitems.sch"
 #include "verbs.sch"
 #include "actors.sch"
+#include "shop.sch"
 
 room Home {
     image = "graphics/rooms/home.bmp";
@@ -118,6 +119,10 @@ room Home {
         putActorAt(inventory, 10, 190,Home);
 
         actorObject[inventory] = inventoryObj;
+
+        if (Shop::turtleIsDone) {
+            setRoomRGBIntensity( 143, 123, 80, 16, 223 );
+        }
 
         createBoxMatrix();
         cameraFollowActor(VAR_EGO);
