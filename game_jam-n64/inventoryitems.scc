@@ -58,7 +58,7 @@ room InventoryItems {
         x = 0;
         name = "Putty with the shape of a skeleton key imprinted in it";
         states = {
-            { 0, 0, "graphics/inventory_items/screwdriver.bmp" }
+            { 0, 0, "graphics/inventory_items/puttyWithKeyPrint.bmp" }
         };
         state = 1;
     }

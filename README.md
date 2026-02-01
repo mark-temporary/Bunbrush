@@ -53,3 +53,4 @@ when the player interacts with an object in the room.
 - In the school, when interacting with an item and walking away too quickly, Bunbrush's animation frame might get stuck for a moment (she's gonna hover instead of walking).
 - Due to a bug in the text rendering system, text in conversations has to be manually forwarded by pressing "A".
 - While not technically a bug, the rooms are still rather empty.
+- Inconsistent palette entries for inventory items across rooms (a loving homage to Day of the Tentacle).

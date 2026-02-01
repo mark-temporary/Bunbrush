@@ -115,7 +115,11 @@ room Road {
         case Interact:
             if (getObjectState(ResRoom::inventoryPopup) == 0) {
                 setObjectState(ResRoom::inventoryPopup, 1);
+                // Small delay to fix the draw order
+                delay(1);
+                Verbs::showVerbs(1);
             } else {
+                Verbs::showVerbs(0);
                 setObjectState(ResRoom::inventoryPopup, 0);
             }
             return;

@@ -70,8 +70,10 @@ room Shop {
                         break;
                 }
             } else if (turtleIsDone) {
+            cutscene(0) {
                 actorSay(turtle, "There you go! Don't break it again and go home now. Buniver probably misses you, mate.");
                 waitForMessage();
+                }
                 startRoom(Outro);
             } else {
                 turtleConvo();
@@ -105,7 +107,11 @@ room Shop {
         case Interact:
             if (getObjectState(ResRoom::inventoryPopup) == 0) {
                 setObjectState(ResRoom::inventoryPopup, 1);
+                // Small delay to fix the draw order
+                delay(1);
+                Verbs::showVerbs(1);
             } else {
+                Verbs::showVerbs(0);
                 setObjectState(ResRoom::inventoryPopup, 0);
             }
             return;

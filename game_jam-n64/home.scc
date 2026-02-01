@@ -55,7 +55,7 @@ room Home {
                 waitForMessage();
             } else if (getObjectOwner(InventoryItems::putty) == VAR_EGO & uncloggedLock) {
                 setObjectOwner(InventoryItems::putty, 0);
-                setObjectOwner(InventoryItems::puttyWithKeyPrint, VAR_EGO);
+                pickupObject(InventoryItems::puttyWithKeyPrint, InventoryItems);
                 animateActor(VAR_EGO, bunbrush_anim_raiseArm);
                 delay(20);
                 startSound(puttySnd);
@@ -89,12 +89,6 @@ room Home {
         dir = SOUTH;
         verb(int vrb,int objA,int objB) {
         case Interact:
-        if (gameJustStarted) {
-            delay(10);
-            gameJustStarted = 0;
-            egoSay("Golly! What a warm and sunny day.");
-            waitForMessage();
-        }
             setObjectState(ResRoom::inventoryPopup, 0);
             putActorAt(bunbrush, 100, 100, Road);
             startRoom(Road);
@@ -108,7 +102,11 @@ room Home {
         case Interact:
             if (getObjectState(ResRoom::inventoryPopup) == 0) {
                 setObjectState(ResRoom::inventoryPopup, 1);
+                // Small delay to fix the draw order
+                delay(1);
+                Verbs::showVerbs(1);
             } else {
+                Verbs::showVerbs(0);
                 setObjectState(ResRoom::inventoryPopup, 0);
             }
             return;
@@ -117,7 +115,6 @@ room Home {
 
     local script entry() {
         Verbs::setupVerbs();
-        Verbs::showVerbs(0);
         Actors::setupActors();
 
         putActorAt(bunbrush,215,175,Home);

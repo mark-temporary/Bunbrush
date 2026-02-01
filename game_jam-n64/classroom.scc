@@ -142,7 +142,7 @@ room ClassRoom {
             startSound(pickupSnd);
             screwdriverTaken = 1;
             delay(20);
-            egoSay("What's this? There's a screwdriver lurking out from behind the glass case");
+            egoSay("What's this? There's a screwdriver sticking out from behind the glass case");
             waitForMessage();
             }
             return;

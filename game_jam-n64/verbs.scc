@@ -23,6 +23,7 @@
 #include "verbs.sch"
 
 room Verbs {
+    trans = 0;
     chset verbChset = "verbs.char";
 
     // setup all the verbs
@@ -37,13 +38,6 @@ room Verbs {
         initCharset(verbChset);
 
         sntcVerb = WalkTo;
-
-        setCurrentVerb(SntcLine);
-        initVerb();
-        setVerbName("%v{sntcVerb} %n{sntcObjADesc} %s{sntcPrepo} %n{sntcObjBDesc}");
-        setVerbXY(160,147);
-        setVerbColor(dimColor);
-        verbCenter();
 
         setCurrentVerb(WalkTo);
         initVerb();
@@ -76,7 +70,7 @@ room Verbs {
                 setCurrentVerb(vrb);
                 initVerb();
                 //verbCenter();
-                setVerbXY(216 + c*48,162 + l*18);
+                setVerbXY(50 + c*48,30 + l*18);
                 setVerbOn();
             }
         dimInt(invObj,8);
@@ -102,33 +96,11 @@ room Verbs {
             restoreVerbs(invSlot0, invSlot0+7, 3); // Show inventory items
  
             ResRoom::inventoryHandler( 0 ); // reset display in case any items have been picked up
-            
-            // The rest can be turned on manually
-            setCurrentVerb(SntcLine);
-            setVerbOn();
-            redrawVerb();
-            setCurrentVerb(invUp);
-            setVerbOn();
-            redrawVerb();
-            setCurrentVerb(invDown);
-            setVerbOn();
-            redrawVerb();
         }
         else
         {
             // saveVerbs(Interact, Interact, 2); // Hide main verbs
             saveVerbs(invSlot0, invSlot0+7, 3); // Hide inventory items
-
-            // The rest can be turned off manually
-            setCurrentVerb(SntcLine);
-            setVerbOff();
-            redrawVerb();
-            setCurrentVerb(invUp);
-            setVerbOff();
-            redrawVerb();
-            setCurrentVerb(invDown);
-            setVerbOff();
-            redrawVerb();
         }
 
         verbsOn = !!show;
