@@ -48,6 +48,7 @@ room TitleScreen {
 
         verb(int vrb,int objA,int objB) {
         case Interact:
+            Home::gameJustStarted = 1;
             setObjectState(objA, 1);
             screenEffect(CommonLib::effect_dissolve());
             delay(60);

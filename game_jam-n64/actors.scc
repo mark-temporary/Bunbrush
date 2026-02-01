@@ -51,6 +51,7 @@ room Actors {
         setCurrentActor(bunbrush);
         initActor();
         setActorTalkColor(BUNBRUSH_COLOR);
+        setActorTalkFrame(bunbrush_anim_talk, bunbrush_anim_init);
         setActorCostume(bunbrushCost);
         setActorAnimSpeed(4);
         setActorWalkSpeed( 5, 5 );

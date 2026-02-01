@@ -19,6 +19,7 @@
 
 
 room Home {
+    bit gameJustStarted;
     bit uncloggedLock;
     bit checkedDoor;
 

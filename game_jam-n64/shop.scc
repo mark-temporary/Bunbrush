@@ -41,6 +41,7 @@ room Shop {
 
     object turtleObj {
         name = "Mr. Turtle";
+        dir = EAST;
         verb(int vrb,int objA,int objB) {
         int rnd;
         case Interact:
@@ -198,15 +199,21 @@ room Shop {
                     switch(selectedSentence) {
                     case 0: 
                         if (Home::checkedDoor) {
+                            egoSay("I can't get into my home. The key broke off");
+                            waitForMessage();
                             actorSay(turtle, "Oh no! Well... Don't fret! Bring me a print of your key and we'll fix this");
                             waitForMessage();
                             break;
                         } else if (!convoTopicBuniver) {
                             convoTopicBuniver = 1;
+                            egoSay("I'm fine. You yourself?");
+                            waitForMessage();
                             actorSay(turtle, "Having a bit of a supply crisis if you can't tell. Nothing is in stock. How's your mate Buniver?");
                             waitForMessage();
                             break;
                         } else {
+                            egoSay("We don't talk anymore. Ever since ... the incident");
+                            waitForMessage();
                             actorSay(turtle, "Oh come now, mate! It was just a silly trading card! Give it a rest, go home now and call him!");
                             waitForMessage();
                             break;
@@ -214,26 +221,38 @@ room Shop {
                     case 1:
                         if (!convoTopicFullgame) {
                             convoTopicFullgame = 1;
+                            egoSay("How's business?");
+                            waitForMessage();
                             actorSay(turtle, "Totally sold out of everything. Can't wait for the full version.");
                             waitForMessage();
                             break;
                         } else if (convoTopicFullgame & !convoTopicDreamdisc) {
                             convoTopicDreamdisc = 1;
+                            egoSay("The what??");
+                            waitForMessage();
                             actorSay(turtle, "You know. The full version of this game. When that fella is finally releasing his SCUNK engine to the public. Can't wait for the Dreamdisc release either");
                             waitForMessage();
                             break;
                         } else if (convoTopicDreamdisc & !convoTopicSCUNK) {
                             convoTopicSCUNK = 1;
+                            egoSay("Dreamdisc?");
+                            waitForMessage();
                             actorSay(turtle, "Another one of these fancy retro consoles you hip kids are all using. They say it has 128 bits. Whatever that means");
                             waitForMessage();
                             break;
                         } else if (convoTopicFullgame & convoTopicDreamdisc & convoTopicSCUNK & !convoTopicAll) {
                             convoTopicAll = 1;
+                            egoSay("What's SCUNK?");
+                            waitForMessage();
                             actorSay(turtle, "It's inspired by those fine gentleman at some ancient film company. A game engine for those who can't let go of the past. Hehe");
                             waitForMessage();
                             break;
                         } else if (convoTopicAll) {
+                            egoSay("That's all just nuts!");
+                            waitForMessage();
                             actorSay(turtle, "I know. Nerds, right?...");
+                            waitForMessage();
+                            egoSay("Yea... Nerds. Always behind their screens...");
                             waitForMessage();
                             break;
                         }

@@ -89,6 +89,12 @@ room Home {
         dir = SOUTH;
         verb(int vrb,int objA,int objB) {
         case Interact:
+        if (gameJustStarted) {
+            delay(10);
+            gameJustStarted = 0;
+            egoSay("Golly! What a warm and sunny day.");
+            waitForMessage();
+        }
             setObjectState(ResRoom::inventoryPopup, 0);
             putActorAt(bunbrush, 100, 100, Road);
             startRoom(Road);
