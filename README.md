@@ -1,9 +1,48 @@
 ![banner](banner.png)
 
+# 
+
 
 # Bunbrush in Operation Friendship Repair
 
 Welcome to the monorepo for my 2025 N64Brew Game Jam entry.
+
+This repository serves as both technical documentation and a preliminary "First Player Guide"
+
+## How my title tries to adhere to the theme
+
+The theme is "Repair" and my game is all about repairing things, be it physical items or disrupted relationships.
+
+The full version of my game will see the protagonist repair a bridge to the other side of the river, fix a friendship that fell apart over the destruction of a special item, as well as see the repair of said item.
+
+Unfortunately, I wasn't able to work on this entry for more than a week out of the entire 64Brew submission period due to my dire private situation.
+
+If you'd like to see more of my work, check out my [YouTube](https://youtube.com/@markbauermeister5449).
+
+## Controls
+
+As an older player myself, I like my controls simple and elegant.
+
+The current [text rendering bug](#text_bug) notwithstanding, Bunbrush in Operation Friendship Repair can essentially be played one-handed.
+
+![Start](start.png) = Pause game (note that save games are currently not supported and "Return to Launcher" just reboots the game).
+
+![A](a.png) = Mainly used to fast forward text
+
+![Z](z.png) = Your "left mouse click". Performs all actions
+
+![Control Stick](stick.png) = Move cursor
+
+## Note on the inventory system
+
+Unfortunately, I wasn't able to finish the inventory system.
+The grand vision is to copy the design of Sam & Max Hit the Road.
+
+In the absence of a properly refined inventory system, the game will simply assume the correct action if Bunbrush's inventory holds the required item
+when the player interacts with an object in the room.
+
+
+## How to build
 
 This repository consists of:
 
@@ -12,8 +51,6 @@ This repository consists of:
 - ScummVM v1.9.0
 
 In addition you'll also need Docker, [ucon64](https://ucon64.sourceforge.io/), the [ScummVM N64 Toolchain](https://hub.docker.com/layers/scummvm/dockerized-toolchains/n64/images/sha256-7c6069c8f3f938c851566d593dd041c9e62ee8d7c11fd0fa837a4aa4e029f81e) as well as the dependencies outlined in the [ScummC README](scummc/README.md).
-
-## How to build
 
 - First build the ScummC compiler
 - Next cd into `game_jam-n64` and run `make tentacle`
@@ -32,28 +69,12 @@ In addition you'll also need Docker, [ucon64](https://ucon64.sourceforge.io/), t
 Don't worry if **scc** throws `cp: cannot stat 'tentacle.sou': No such file or directory`. The game doesn't use it and the build should still have succeeded.
 
 
-## How my title tries to adhere to the theme
-
-The theme is "Repair" and my game is all about repairing things, be it physical items or disrupted relationships.
-
-The full version of my game will see the protagonist repair a bridge to the other side of the river, fix a friendship that fell apart over the destruction of a special item, as well as see the repair of said item.
-
-Unfortunately, I wasn't able to work on this entry for more than a week out of the entire 64Brew submission period due to my dire private situation.
-
-If you'd like to see more of my work, check out my [YouTube](https://youtube.com/@markbauermeister5449).
-
-## Note on the inventory system
-
-Unfortunately, I wasn't able to finish the inventory system.
-The grand vision is to copy the design of Sam & Max Hit the Road.
-
-In the absence of a properly refined inventory system, the game will simply assume the correct action if Bunbrush's inventory holds the required item
-when the player interacts with an object in the room.
-
 ## Known bugs
 
 - Picking up an item during a scrolling window will fast forward the text.
 - In the school, when interacting with an item and walking away too quickly, Bunbrush's animation frame might get stuck for a moment (she's gonna hover instead of walking).
+<a name="text_bug">
 - Due to a bug in the text rendering system, text in conversations has to be manually forwarded by pressing "A".
+</a>
 - While not technically a bug, the rooms are still rather empty.
 - Inconsistent palette entries for inventory items across rooms (a loving homage to [Day of the Tentacle](https://tcrf.net/Day_of_the_Tentacle/Unused_Graphics#Incorrectly_Assigned_Palette)).
