@@ -73,8 +73,12 @@ Don't worry if **scc** throws `cp: cannot stat 'tentacle.sou': No such file or d
 
 - Picking up an item during a scrolling window will fast forward the text.
 - In the school, when interacting with an item and walking away too quickly, Bunbrush's animation frame might get stuck for a moment (she's gonna hover instead of walking).
-<a name="text_bug">
+
+<ul>
+<li><a name="text_bug">
 - Due to a bug in the text rendering system, text in conversations has to be manually forwarded by pressing "A".
-</a>
+</a></li>
+</ul>
+
 - While not technically a bug, the rooms are still rather empty.
 - Inconsistent palette entries for inventory items across rooms (a loving homage to [Day of the Tentacle](https://tcrf.net/Day_of_the_Tentacle/Unused_Graphics#Incorrectly_Assigned_Palette)).
