@@ -45,7 +45,7 @@ room Outro {
     }
 
     local script entry() {
-        setCursorTransparency(0);                
+        ResRoom::hideCursor();
         printOutro();
         playCDTrack(5,1,1,305067);
     }

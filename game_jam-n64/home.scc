@@ -123,7 +123,8 @@ room Home {
         actorObject[inventory] = inventoryObj;
 
         if (Shop::turtleIsDone) {
-            setRoomRGBIntensity( 143, 123, 80, 16, 223 );
+            setRoomRGBIntensity( 143, 123, 80, 16, 159 );
+            setRoomRGBIntensity( 143, 123, 80, 192, 223 );
         }
 
         createBoxMatrix();

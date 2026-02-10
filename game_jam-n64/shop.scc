@@ -113,6 +113,8 @@ room Shop {
             } else {
                 Verbs::showVerbs(0);
                 setObjectState(ResRoom::inventoryPopup, 0);
+                setCursorImage(ResRoom::DefaultCursor, ResRoom);
+                setCursorTransparency(0);
             }
             return;
         }
@@ -128,7 +130,8 @@ room Shop {
         actorObject[inventory] = inventoryObj;
 
         if (turtleIsDone) {
-            setRoomRGBIntensity( 143, 123, 80, 16, 223 );
+            setRoomRGBIntensity( 143, 123, 80, 16, 159 );
+            setRoomRGBIntensity( 143, 123, 80, 192, 223 );
         }
 
         createBoxMatrix();
