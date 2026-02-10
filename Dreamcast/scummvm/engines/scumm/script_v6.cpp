@@ -264,6 +264,7 @@ void ScummEngine_v6::setupOpcodes() {
 	/* EC */
 	OPCODE(0xec, o6_getActorLayer);
 	OPCODE(0xed, o6_getObjectNewDir);
+	OPCODE(0xf2, o6_playCDTrack);
 }
 
 int ScummEngine_v6::popRoomAndObj(int *room) {
@@ -1454,6 +1455,15 @@ void ScummEngine_v6::o6_startMusic() {
 		error("o6_startMusic() It shouldn't be called here for imuse digital");
 
 	_sound->startSound(pop());
+}
+
+void ScummEngine_v6::o6_playCDTrack() {
+	int duration = pop();
+	int startPos = pop();
+	int numLoops = pop();
+	int track = pop();
+
+	_sound->playCDTrack(track, numLoops, startPos, duration);
 }
 
 void ScummEngine_v6::o6_stopObjectScript() {

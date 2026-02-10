@@ -90,7 +90,7 @@ public:
 		assert(!_dlHandle);
 		DiscLabel original;
 		checkDisc(_label);
-		drawPluginProgress(_filename.toString(Common::Path::kNativeSeparator));
+		//drawPluginProgress(_filename.toString(Common::Path::kNativeSeparator));
 		_dlHandle = dlopen(_filename.toString(Common::Path::kNativeSeparator).c_str(), RTLD_LAZY);
 
 		if (!_dlHandle) {
