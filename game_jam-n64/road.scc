@@ -38,20 +38,6 @@ room Road {
 
     // cycle Cycl = { 64, 0, 1, 2};
 
-    object room2 {
-        trans = 0;
-        x = 220;
-        y =  100;
-        name = "Door";
-        dir = SOUTH;
-        states = {
-            {32, 48, "graphics/room_items/map_pin.bmp",
-            {"graphics/room_items/map_pin-z.bmp"}}
-        };
-
-        state = 0;
-    }
-
     object bush {
         trans = 0;
         x =   40;
@@ -61,16 +47,19 @@ room Road {
         state = 0;
         verb(int vrb,int objA,int objB) {
         case Interact:
-            if (Home::uncloggedLock & getObjectOwner(InventoryItems::putty) != VAR_EGO) {
-                pickupObject(InventoryItems::putty, InventoryItems);
-                startSound(pickupSnd);
-                egoSay("Hey! There's a lump of putty in there. That wasn't there before. \w");
-                animateActor(VAR_EGO, bunbrush_anim_raiseArm);
-                delay(20);
-                return;
-            } else {
-                return;
-            }
+            if (Home::uncloggedLock
+                & getObjectOwner(InventoryItems::putty) != VAR_EGO
+                & getObjectOwner(InventoryItems::puttyWithKeyPrint) != VAR_EGO
+                & getObjectOwner(InventoryItems::puttyWithKeyPrint) != turtle) {
+                    pickupObject(InventoryItems::putty, InventoryItems);
+                    startSound(pickupSnd);
+                    egoSay("Hey! There's a lump of putty in there. That wasn't there before. \w");
+                    animateActor(VAR_EGO, bunbrush_anim_raiseArm);
+                    delay(20);
+                    return;
+                } else {
+                    return;
+                }
             return;
         }
     }
@@ -127,7 +116,6 @@ room Road {
     }
 
     local script entry() {
-        Verbs::setupVerbs();
         Verbs::showVerbs(0);
         Actors::setupActors();
 

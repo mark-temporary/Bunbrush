@@ -41,15 +41,21 @@ room ResRoom {
     // Our game's standard charset
     chset chtest = "vera.char";
     // dialog charset
-    chset dialogCharset = "vera-small.char";
+    chset dialogCharset = "vera.char";
 
     chset imageChset = "ruigslay.char";
 
     int selVerb,altVerb;
     int tryPick;
 
-    // some startup scripts
-
+    // an object for the cursor image
+    object DefaultCursor {
+        w = 32;
+        h = 24;
+        states = {
+            { 3, 3, "graphics/cursors/default_cursor.bmp" }
+        };
+    }
 
     // this script runs in the background, checking where the mouse is
     // and updating the sentence/setting the alt verb
@@ -109,9 +115,9 @@ room ResRoom {
                 if(obj >= invSlot0 && obj <= invSlot7) {
                     obj = findInventory(VAR_EGO,obj-invSlot0+1+invOffset);
                     if(!selVerb || selVerb == Interact)
-                        vrb = Interact;
+                        vrb = UseItem;
                     else
-                        vrb = Interact;
+                        vrb = UseItem;
                 } else
                     obj = 0;
             }

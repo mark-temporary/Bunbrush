@@ -76,15 +76,9 @@ room Map {
     }
 
     local script entry() {
-        // VAR_VERB_SCRIPT = MapInterfaceTemplate::inputHandler;
-
-        Verbs::setupVerbs();
         Verbs::showVerbs(0);
-        // Actors::setupActors();
         setCurrentActor(bunbrush);
         setActorWalkSpeed( 10, 10 );
-
-        // putActorAt(bunbrush,100,100,Map);
 
         createBoxMatrix();
         cameraFollowActor(VAR_EGO);

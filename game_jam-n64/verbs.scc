@@ -45,6 +45,9 @@ room Verbs {
         setCurrentVerb(Interact);
         initVerb();
 
+        setCurrentVerb(UseItem);
+        initVerb();
+
         setCurrentVerb(invUp);
         initVerb();
         setVerbName("\x03");

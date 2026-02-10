@@ -114,7 +114,6 @@ room Home {
     }
 
     local script entry() {
-        Verbs::setupVerbs();
         Actors::setupActors();
 
         putActorAt(bunbrush,215,175,Home);

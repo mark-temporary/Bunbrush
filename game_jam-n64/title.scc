@@ -54,6 +54,8 @@ room TitleScreen {
             delay(60);
             playCDTrack(1,365,1,115067);
             delay(10);
+            setCursorImage(ResRoom::DefaultCursor,ResRoom);
+            setCursorTransparency(0);
             startRoom(Home);
             return;
         }
@@ -102,7 +104,6 @@ room TitleScreen {
     local script entry() {
         Verbs::setupVerbs();
         Actors::setupActors();
-        setCursorTransparency(0);                
         printIntro();
         playCDTrack(3,365,1,3002382000);
     }

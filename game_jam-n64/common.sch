@@ -26,7 +26,7 @@
 #include "map.sch"
 
 // The action verbs
-verb Interact;
+verb Interact,UseItem;
 
 verb WalkTo;
 
@@ -95,6 +95,8 @@ room ResRoom {
 
     object inventoryPopup;
     object alert;
+
+    object DefaultCursor;
 
     script inputHandler(int area,int cmd, int btn);
     script keyboardHandler(int key);

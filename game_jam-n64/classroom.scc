@@ -176,7 +176,6 @@ room ClassRoom {
     }
 
     local script entry() {
-        Verbs::setupVerbs();
         Verbs::showVerbs(0);
         Actors::setupActors();
 

@@ -26,7 +26,8 @@ room InventoryItems {
     object screwdriver {
         w = 32;
         h = 32;
-        x = 0;
+        x = 16;
+        y = 16;
         name = "Screwdriver";
         states = {
             { 0, 0, "graphics/inventory_items/screwdriver.bmp" }
@@ -34,9 +35,9 @@ room InventoryItems {
         state = 1;
 
         verb(int vrb,int objA,int objB) {
-        case Interact:
-            egoSay("A trusty screwdriver");
-            waitForMessage();
+        case UseItem:
+            setCursorImage(objA, InventoryItems);
+            setCursorTransparency(0);
             return;
         }
     }
@@ -44,22 +45,38 @@ room InventoryItems {
     object putty {
         w = 32;
         h = 32;
-        x = 0;
+        x = 16;
+        y = 16;
         name = "A ball of putty";
         states = {
             { 0, 0, "graphics/inventory_items/putty.bmp" }
         };
         state = 1;
+
+        verb(int vrb,int objA,int objB) {
+        case UseItem:
+            setCursorImage(objA, InventoryItems);
+            setCursorTransparency(0);
+            return;
+        }
     }
 
     object puttyWithKeyPrint {
         w = 32;
         h = 32;
-        x = 0;
+        x = 16;
+        y = 16;
         name = "Putty with the shape of a skeleton key imprinted in it";
         states = {
             { 0, 0, "graphics/inventory_items/puttyWithKeyPrint.bmp" }
         };
         state = 1;
+
+        verb(int vrb,int objA,int objB) {
+        case UseItem:
+            setCursorImage(objA, InventoryItems);
+            setCursorTransparency(0);
+            return;
+        }
     }
 }

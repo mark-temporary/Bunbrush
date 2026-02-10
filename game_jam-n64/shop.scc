@@ -46,7 +46,7 @@ room Shop {
         int rnd;
         case Interact:
             if (getObjectOwner(InventoryItems::puttyWithKeyPrint) == VAR_EGO & !turtleIsBusy) {
-                setObjectOwner(InventoryItems::puttyWithKeyPrint, 0);
+                setObjectOwner(InventoryItems::puttyWithKeyPrint, turtle);
                 animateActor(VAR_EGO, bunbrush_anim_raiseArm);
                 turtleIsBusy = 1;
                 delay(20);
@@ -119,7 +119,6 @@ room Shop {
     }
 
     local script entry() {
-        Verbs::setupVerbs();
         Verbs::showVerbs(0);
         Actors::setupActors();
 
